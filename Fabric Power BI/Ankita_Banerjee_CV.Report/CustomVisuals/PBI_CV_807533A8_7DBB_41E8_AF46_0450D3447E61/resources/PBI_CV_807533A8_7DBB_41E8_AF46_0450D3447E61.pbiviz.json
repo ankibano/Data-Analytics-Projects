@@ -1,0 +1,412 @@
+{
+  "visual": {
+    "name": "PowerBI-visuals-decision-tree",
+    "displayName": "Decision tree",
+    "guid": "PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61",
+    "visualClassName": "Visual",
+    "version": "1.0.1",
+    "description": "<span>Decision trees is schematic tree-shaped diagram used to determine a course of action and/or show a statistical probability. Current visual implements the popular and widely used tools of recursive partitioning for decision tree construction. You can control the algorithm parameters and the visual attributes to suit your needs.<br/><br/><span style='font-style:italic'>Service prerequisites:</span> R-powered custom visual is used in service seamlessly<br/><br /><span style='font-style:italic'>Desktop prerequisites:</span> To run R scripts in Power BI Desktop, you must separately install R on your local computer.<br />You can download and install R for free from the <a href='https://mran.revolutionanalytics.com/download/'>Revolution Open download page</a> or the <a href='https://cran.r-project.org/bin/windows/base/'>CRAN Repository</a><br /><br /> <span style='font-style:italic'> R package dependencies(auto-installed): </span> rpart, rpart.plot, RColorBrewer <br /><br /> <span style='font-style:italic'> Supports R versions: </span> R 3.3.1, R 3.3.0, MRO 3.3.1, MRO 3.3.0, MRO 3.2.2  <br /></span>",
+    "supportUrl": "http://community.powerbi.com/",
+    "gitHubUrl": "https://github.com/microsoft/PowerBI-visuals-decision-tree"
+  },
+  "apiVersion": "1.2.0",
+  "author": {
+    "name": "Microsoft",
+    "email": "pbicvsupport@microsoft.com"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": [],
+  "style": "style/visual.less",
+  "capabilities": {
+    "dataRoles": [
+      {
+        "displayName": "Target Variable",
+        "kind": "GroupingOrMeasure",
+        "name": "Target"
+      },
+      {
+        "displayName": "Input Variables",
+        "kind": "Grouping",
+        "name": "Variables"
+      }
+    ],
+    "dataViewMappings": [
+      {
+        "conditions": [
+          {
+            "Target": {
+              "max": 1
+            },
+            "Variables": {
+              "max": 1000
+            }
+          }
+        ],
+        "scriptResult": {
+          "dataInput": {
+            "table": {
+              "rows": {
+                "select": [
+                  {
+                    "for": {
+                      "in": "Target"
+                    }
+                  },
+                  {
+                    "for": {
+                      "in": "Variables"
+                    }
+                  }
+                ],
+                "dataReductionAlgorithm": {
+                  "top": {}
+                }
+              }
+            }
+          },
+          "script": {
+            "scriptProviderDefault": "R",
+            "scriptOutputType": "png",
+            "source": {
+              "objectName": "rcv_script",
+              "propertyName": "source"
+            },
+            "provider": {
+              "objectName": "rcv_script",
+              "propertyName": "provider"
+            },
+            "scriptSourceDefault": "# Copyright (c) Microsoft Corporation.  All rights reserved.\r\n\r\n# Third Party Programs. This software enables you to obtain software applications from other sources. \r\n# Those applications are offered and distributed by third parties under their own license terms.\r\n# Microsoft is not developing, distributing or licensing those applications to you, but instead, \r\n# as a convenience, enables you to use this software to obtain those applications directly from \r\n# the application providers.\r\n# By using the software, you acknowledge and agree that you are obtaining the applications directly\r\n# from the third party providers and under separate license terms, and that it is your responsibility to locate, \r\n# understand and comply with those license terms.\r\n# Microsoft grants you no license rights for third-party software or applications that is obtained using this software.\r\n\r\n\r\n##PBI_R_VISUAL: VIZGAL_DTREE  Graphical display of Decision Tree \r\n# Computes and visualizes a decision tree used for classification or piecewise regression\r\n# \r\n# INPUT: \r\n# The input dataset should include at least two columns. First column is a dependent variable,  \r\n# the rest of columns are independend variables. \r\n# EXAMPLES:\r\n#  #for R environment\r\n#  dataset<-mtcars #assign dataset\r\n#  source(\"visGal_corrplot.R\") #create graphics\r\n#\r\n# WARNINGS: \r\n#     This visual intended to be used for classification tasks. It was not tested for regression trees. \r\n#\r\n# CREATION DATE: 06/01/2016\r\n#\r\n# LAST UPDATE: 08/09/2016\r\n#\r\n# VERSION: 0.0.1\r\n#\r\n# R VERSION TESTED: 3.2.2\r\n# \r\n# AUTHOR: B. Efraty (boefraty@microsoft.com)\r\n#\r\n# REFERENCES: https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html\r\n\r\n#save(list = ls(all.names = TRUE), file='C:/Users/boefraty/projects/PBI/tempData.Rda')\r\n\r\n\r\n\r\nif(exists(\"Target\") && !exists(\"Variables\"))\r\n{\r\n  plot.new()\r\n  title( main  =  NULL, sub  =  \"`Input Variables` are not yet defined\", outer  =  FALSE, col.sub  =  \"gray50\" )\r\n  dataset =data.frame(demo1=1,demo2=2) # demo to stop execution with empty plot\r\n}\r\n\r\nif(!exists(\"Target\") && exists(\"Variables\"))\r\n{\r\n  plot.new()\r\n  title( main  =  NULL, sub  =  \" `Target Variable` is not yet defined\", outer  =  FALSE, col.sub  =  \"gray50\" )\r\n  dataset =data.frame(demo1=1,demo2=2) # demo to stop execution with empty plot\r\n}\r\n#  stop(\"Variable `Target` is not defined\")\r\n\r\nif(exists(\"Target\") && exists(\"Variables\") && !exists( \"dataset\" ))\r\n  dataset = cbind(Target,Variables)\r\n\r\n\r\n\r\n#PBI_EXAMPLE_DATASET for debugging purposes \r\nif(!exists( \"dataset\" ))\r\n{\r\n  data( iris ) #Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, Species\r\n  dataset  =  iris[, c(5, 1, 2, 3, 4)]\r\n}\r\n\r\n############ User Parameters #########\r\n\r\nif(exists(\"settings_tree_params_show\") && settings_tree_params_show == FALSE)\r\n  rm(list= ls(pattern = \"settings_tree_params_\"))\r\nif(exists(\"settings_opt_params_show\") && settings_opt_params_show == FALSE)\r\n  rm(list= ls(pattern = \"settings_opt_params_\"))\r\nif(exists(\"settings_additional_params_show\") && settings_additional_params_show == FALSE)\r\n  rm(list= ls(pattern = \"settings_additional_params_\"))\r\n\r\n\r\n##PBI_PARAM: Should warnings messages be displayed?\r\n#Type:logical, Default:TRUE, Range:NA, PossibleValues:NA, Remarks: NA\r\nshowWarnings  =  TRUE\r\nif(exists(\"settings_additional_params_showWarnings\"))\r\n  showWarnings = settings_additional_params_showWarnings\r\n\r\n##PBI_PARAM: the maximum depth of  the final tree [1, 30]\r\n#Type:positive integer, Default:20, Range:[1, 30], PossibleValues:NA, Remarks: The tree of maxDepth is not promised\r\nmaxDepth   =   20\r\nif(exists(\"settings_tree_params_maxDepth\"))\r\n  maxDepth = as.numeric(settings_tree_params_maxDepth)\r\n\r\n###############Library Declarations###############\r\nlibraryRequireInstall = function(packageName, ...)\r\n{\r\n  if(!require(packageName, character.only = TRUE)) \r\n    warning(paste(\"*** The package: '\", packageName, \"' was not installed ***\",sep=\"\"))\r\n}\r\n\r\nlibraryRequireInstall(\"rpart\")\r\nlibraryRequireInstall(\"rpart.plot\")\r\nlibraryRequireInstall(\"RColorBrewer\")\r\n\r\n###### Inner parameters and definitions ###################\r\n\r\n##PBI_PARAM: Should info text be displayed in subtitle?\r\n#Type:logical, Default:TRUE, Range:NA, PossibleValues:NA, Remarks: NA\r\nshowInfo  =  TRUE\r\nif(exists(\"settings_additional_params_showInfo\"))\r\n  showInfo = settings_additional_params_showInfo\r\n\r\n##PBI_PARAM: Complexity parameter. \r\n# Any split that does not decrease the overall lack of fit by a factor of complexity is not attempted.\r\n#Type:numeric, Default:1e-05, Range:[0, 1], PossibleValues:NA, Remarks: If complexity and xval are 0 tree is maximal\r\ncomplexity   =  1e-05 \r\nif(exists(\"settings_opt_params_complexity\"))\r\n  complexity = as.numeric(settings_opt_params_complexity)\r\n\r\n##PBI_PARAM: the minimum number of observations in any terminal (leaf) node \r\n#Type:positive integer, Default:2, Range:[1, 100], PossibleValues:NA, Remarks: NA\r\nminBucket  =  2\r\nif(exists(\"settings_tree_params_minBucket\"))\r\n  minBucket = as.numeric(settings_tree_params_minBucket)\r\n\r\n##PBI_PARAM: indicator if xval parameter is to be found automatically \r\n#Type:bool, Default:TRUE, Range:NA, PossibleValues:NA, Remarks: NA\r\nautoXval  =  FALSE\r\n\r\n##PBI_PARAM: number of cross-validations, used only if autoXval  =  FALSE\r\n#Type:integer, Default:10, Range:[0, 1000], PossibleValues:NA, Remarks: Can not be larger than number of records\r\nxval  =  NA\r\nif(exists(\"settings_opt_params_xval\"))\r\n  xval = as.numeric(settings_opt_params_xval)\r\n\r\nif(is.na(xval))\r\n  autoXval = TRUE\r\n  \r\n##PBI_PARAM: the random number generator (RNG) state for random number generation \r\n#Type: numeric, Default:42, Range:NA, PossibleValues:NA, Remarks: NA\r\nrandSeed  =  42\r\n\r\n##PBI_PARAM: minimum required samples (rows in data table)\r\n#Type: positive integer, Default:10, Range:[5, 100], PossibleValues:NA, Remarks: NA\r\nminRows  =  10\r\n\r\n##PBI_PARAM: maximum attempts to construct tree with optimal depth > 1 \r\n#Type: positive integer, Default:10, Range:[1, 50], PossibleValues:NA, Remarks: NA\r\nmaxNumAttempts  =  10\r\nif(exists(\"settings_opt_params_maxNumAttempts\"))\r\n  maxNumAttempts = as.numeric(settings_opt_params_maxNumAttempts)\r\n\r\n###############Internal functions definitions#################\r\n\r\n#automaticly select the number of cross-validations \r\nautoXvalFunc <- function(numRows)\r\n{\r\n  breaks  =  c(0, 5, 10, 100, 500, 1000, 10000, Inf)\r\n  xvals  =  c(0, 2, 10, 100, 10, 5, 2)\r\n  return( xvals[cut(numRows, breaks  =  breaks )] )\r\n}\r\n\r\n#select best CP by cptable (for optimal tree pruning) \r\noptimalCPbyXError <- function(cptable, delta  =  0.00001)\r\n{\r\n  opt  =  data.frame(ind  =  NaN, CP  =  NaN, xerror  =  NaN)\r\n  xerror<-cptable$xerror\r\n  relErr<-cptable$rel\r\n  if(is.null(xerror))\r\n    xerror<-relErr\r\n  CP<-cptable$CP\r\n  thresh<-min(xerror) + (max(xerror) - min(xerror))*delta\r\n  opt$ind<-min(seq(1, length(xerror))[xerror <=  thresh])\r\n  opt$CP<-CP[opt$ind]\r\n  opt$xerror<-ifelse(is.null(cptable$xerror), NA, xerror[opt$ind])\r\n  opt$relErr<-relErr[opt$ind]\r\n  return(opt)\r\n}\r\n\r\n#format numbers to fixed number of digits after the floating point\r\nd2form  =  function(x, p  =  2) {if(is.numeric(x)) format(round(x, p), nsmall  =  p)}\r\n\r\n#automatically convert columns with few unique values to factors\r\nconvertCol2factors<-function(data, minCount  =  3)\r\n{\r\n  for (c in 1:ncol(data))\r\n    if(is.logical(data[, c])){\r\n      data[, c]  =  as.factor(data[, c])\r\n    }else{\r\n      uc<-unique(data[, c])\r\n      if(length(uc) <=  minCount)\r\n        data[, c]  =  as.factor(data[, c])\r\n    }\r\n  return(data)\r\n}\r\n\r\n#compute root node error \r\nrootNodeError<-function(labels)\r\n{\r\n  ul<-unique(labels)\r\n  g<-NULL\r\n  for (u in ul) g  =  c(g, sum(labels == u))\r\n  return(1-max(g)/length(labels))\r\n}\r\n\r\n# this function is almost identical to fancyRpartPlot{rattle} \r\n# it is duplicated here because the call for library(rattle) may trigger GTK load, \r\n# which may be missing on user's machine \r\nreplaceFancyRpartPlot<-function (model, main  =  \"\", sub  =  \"\", palettes, ...) \r\n{\r\n  if(nchar(sub)>round(par()$din[1]/0.075) && nchar(sub)> 1)\r\n    sub = paste(substring(sub,1,floor(par()$din[1]/0.075)),\"...\",sep=\"\")\r\n\r\n  num.classes <- length(attr(model, \"ylevels\"))\r\n  \r\n  default.palettes <- c(\"Greens\", \"Blues\", \"Oranges\", \"Purples\", \r\n                        \"Reds\", \"Greys\")\r\n  if (missing(palettes)) \r\n    palettes <- default.palettes\r\n  \r\n  missed <- setdiff(1:6, seq(length(palettes)))\r\n  palettes <- c(palettes, default.palettes[missed])\r\n  numpals <- 6\r\n  palsize <- 5\r\n  pals <- c(RColorBrewer::brewer.pal(9, palettes[1])[1:5], \r\n            RColorBrewer::brewer.pal(9, palettes[2])[1:5], RColorBrewer::brewer.pal(9, \r\n                                                                                    palettes[3])[1:5], RColorBrewer::brewer.pal(9, palettes[4])[1:5], \r\n            RColorBrewer::brewer.pal(9, palettes[5])[1:5], RColorBrewer::brewer.pal(9, \r\n                                                                                    palettes[6])[1:5])\r\n  if (model$method  ==  \"class\") {\r\n    yval2per <- -(1:num.classes) - 1\r\n    per <- apply(model$frame$yval2[, yval2per], 1, function(x) x[1 + \r\n                                                                   x[1]])\r\n  }\r\n  else {\r\n    per <- model$frame$yval/max(model$frame$yval)\r\n  }\r\n  per <- as.numeric(per)\r\n  if (model$method  ==  \"class\") \r\n    col.index <- ((palsize * (model$frame$yval - 1) + trunc(pmin(1 + \r\n                                                                   (per * palsize), palsize)))%%(numpals * palsize))\r\n  else col.index <- round(per * (palsize - 1)) + 1\r\n  col.index <- abs(col.index)\r\n  if (model$method  ==  \"class\") \r\n    extra <- 104\r\n  else extra <- 101\r\n  rpart.plot::prp(model, type  =  2, extra  =  extra, box.col  =  pals[col.index], \r\n                  nn  =  TRUE, varlen  =  0, faclen  =  0, shadow.col  =  \"grey\", \r\n                  fallen.leaves  =  TRUE, branch.lty  =  3, ...)\r\n  title(main  =  main, sub  =  sub, cex.sub = 0.8)\r\n}\r\n\r\n\r\n\r\n\r\n###############Upfront input correctness validations (where possible)#################\r\n\r\npbiWarning<-\"\"\r\npbiInfo<-\"\"\r\n\r\ndataset <- dataset[complete.cases(dataset[, 1]), ] #remove rows with corrupted labels\r\ndataset  =  convertCol2factors(dataset)\r\nnr <- nrow( dataset )\r\nnc <- ncol( dataset )\r\nnl <- length( unique(dataset[, 1]))\r\n\r\ngoodDim <- (nr  >=minRows && nc  >= 2 && nl  >= 2)\r\n\r\n\r\n##############Main Visualization script###########\r\nset.seed(randSeed)\r\nopt  =  NULL\r\ndtree  =  NULL\r\n\r\nif(autoXval)\r\n  xval<-autoXvalFunc(nr)\r\n\r\ndNames <- names(dataset)\r\nX <- as.vector(dNames[-1])\r\n\r\nform <- as.formula(paste('`', dNames[1], '`', \"~ .\", sep  =  \"\"))\r\n\r\n# Run the model\r\nif(goodDim)\r\n{\r\n  for(a in 1:maxNumAttempts)\r\n  {\r\n    dtree <- rpart(form, dataset, control  =  rpart.control(minbucket  =  minBucket, cp  =  complexity, maxdepth  =  maxDepth, xval  =  xval)) #large tree\r\n    rooNodeErr <- rootNodeError(dataset[, 1])\r\n    opt <- optimalCPbyXError(as.data.frame(dtree$cptable))\r\n    \r\n    dtree<-prune(dtree, cp  =  opt$CP)\r\n    if(opt$ind > 1)\r\n      break;\r\n  }\r\n}\r\n\r\n#info for classifier\r\nif( showInfo && !is.null(dtree) && dtree$method  ==  'class')\r\n  pbiInfo <- paste(\"Rel error  =  \", d2form(opt$relErr * rooNodeErr), \r\n                 \"; CVal error  =  \", d2form(opt$xerror * rooNodeErr), \r\n                 \"; Root error  =  \", d2form(rooNodeErr), \r\n                 \";cp  =  \", d2form(opt$CP, 3), sep  =  \"\")\r\n\r\nif(goodDim && opt$ind>1)\r\n{\r\n  #fancyRpartPlot(dtree, sub  =  pbiInfo)\r\n  replaceFancyRpartPlot(dtree, sub  =  pbiInfo)\r\n  \r\n  \r\n}else{\r\n  if( showWarnings )\r\n    pbiWarning <- ifelse(goodDim, paste(\"The tree depth is zero.\\n Root error  =  \", d2form(rooNodeErr), sep  =  \"\"), \r\n                                     \"\\n Wrong data dimensionality\" )\r\n  \r\n  plot.new()\r\n  title( main  =  NULL, sub  =  pbiWarning, outer  =  FALSE, col.sub  =  \"gray50\" )\r\n}\r\nremove(\"dataset\")\r\n"
+          }
+        }
+      }
+    ],
+    "objects": {
+      "rcv_script": {
+        "properties": {
+          "provider": {
+            "type": {
+              "text": true
+            }
+          },
+          "source": {
+            "type": {
+              "scripting": {
+                "source": true
+              }
+            }
+          }
+        }
+      },
+      "settings_tree_params": {
+        "displayName": "Tree parameters",
+        "properties": {
+          "show": {
+            "type": {
+              "bool": true
+            }
+          },
+          "maxDepth": {
+            "displayName": "Maximum depth",
+            "description": "Maximum depth (approximate)",
+            "type": {
+              "enumeration": [
+                {
+                  "displayName": "2",
+                  "value": "2"
+                },
+                {
+                  "displayName": "3",
+                  "value": "3"
+                },
+                {
+                  "displayName": "4",
+                  "value": "4"
+                },
+                {
+                  "displayName": "5",
+                  "value": "5"
+                },
+                {
+                  "displayName": "6",
+                  "value": "6"
+                },
+                {
+                  "displayName": "7",
+                  "value": "7"
+                },
+                {
+                  "displayName": "8",
+                  "value": "8"
+                },
+                {
+                  "displayName": "9",
+                  "value": "9"
+                },
+                {
+                  "displayName": "10",
+                  "value": "10"
+                },
+                {
+                  "displayName": "11",
+                  "value": "11"
+                },
+                {
+                  "displayName": "12",
+                  "value": "12"
+                },
+                {
+                  "displayName": "13",
+                  "value": "13"
+                },
+                {
+                  "displayName": "14",
+                  "value": "14"
+                },
+                {
+                  "displayName": "15",
+                  "value": "15"
+                }
+              ]
+            }
+          },
+          "minBucket": {
+            "displayName": "Minimum bucket size ",
+            "description": "Minimum number of observations in any terminal (leaf) node",
+            "type": {
+              "enumeration": [
+                {
+                  "displayName": "2",
+                  "value": "2"
+                },
+                {
+                  "displayName": "5",
+                  "value": "5"
+                },
+                {
+                  "displayName": "7",
+                  "value": "7"
+                },
+                {
+                  "displayName": "10",
+                  "value": "10"
+                },
+                {
+                  "displayName": "15",
+                  "value": "15"
+                },
+                {
+                  "displayName": "25",
+                  "value": "25"
+                },
+                {
+                  "displayName": "35",
+                  "value": "35"
+                },
+                {
+                  "displayName": "50",
+                  "value": "50"
+                },
+                {
+                  "displayName": "65",
+                  "value": "65"
+                },
+                {
+                  "displayName": "80",
+                  "value": "80"
+                },
+                {
+                  "displayName": "100",
+                  "value": "100"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "settings_opt_params": {
+        "displayName": "Advanced parameters",
+        "description": "Controls the recursive partitioning algorithm",
+        "properties": {
+          "show": {
+            "type": {
+              "bool": true
+            }
+          },
+          "complexity": {
+            "displayName": "Complexity",
+            "description": "Split that does not decrease the overall lack of fit by a factor of complexity is not attempted",
+            "type": {
+              "enumeration": [
+                {
+                  "displayName": "0.5",
+                  "value": "0.5"
+                },
+                {
+                  "displayName": "0.25",
+                  "value": "0.25"
+                },
+                {
+                  "displayName": "0.1",
+                  "value": "0.1"
+                },
+                {
+                  "displayName": "0.01",
+                  "value": "0.01"
+                },
+                {
+                  "displayName": "1e-3",
+                  "value": "1e-3"
+                },
+                {
+                  "displayName": "1e-4",
+                  "value": "1e-4"
+                },
+                {
+                  "displayName": "1e-5",
+                  "value": "1e-5"
+                },
+                {
+                  "displayName": "1e-7",
+                  "value": "1e-7"
+                },
+                {
+                  "displayName": "1e-10",
+                  "value": "1e-10"
+                },
+                {
+                  "displayName": "1e-12",
+                  "value": "1e-12"
+                }
+              ]
+            }
+          },
+          "xval": {
+            "displayName": "Cross-validation",
+            "description": "The k parameter in k-fold cross validation",
+            "type": {
+              "enumeration": [
+                {
+                  "displayName": "auto",
+                  "value": "auto"
+                },
+                {
+                  "displayName": "None",
+                  "value": "0"
+                },
+                {
+                  "displayName": "2-fold",
+                  "value": "2"
+                },
+                {
+                  "displayName": "5-fold",
+                  "value": "10"
+                },
+                {
+                  "displayName": "10-fold",
+                  "value": "10"
+                },
+                {
+                  "displayName": "25-fold",
+                  "value": "25"
+                },
+                {
+                  "displayName": "50-fold",
+                  "value": "50"
+                },
+                {
+                  "displayName": "100-fold",
+                  "value": "100"
+                }
+              ]
+            }
+          },
+          "maxNumAttempts": {
+            "displayName": "Maximum attempts",
+            "description": "Maximum attempts to construct the tree with an optimal depth greater than one",
+            "type": {
+              "enumeration": [
+                {
+                  "displayName": "1",
+                  "value": "1"
+                },
+                {
+                  "displayName": "3",
+                  "value": "3"
+                },
+                {
+                  "displayName": "7",
+                  "value": "7"
+                },
+                {
+                  "displayName": "10",
+                  "value": "10"
+                },
+                {
+                  "displayName": "25",
+                  "value": "25"
+                },
+                {
+                  "displayName": "50",
+                  "value": "50"
+                },
+                {
+                  "displayName": "100",
+                  "value": "100"
+                },
+                {
+                  "displayName": "1000",
+                  "value": "1000"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "settings_additional_params": {
+        "displayName": "Additional parameters",
+        "properties": {
+          "show": {
+            "type": {
+              "bool": true
+            }
+          },
+          "showWarnings": {
+            "displayName": "Show warnings",
+            "type": {
+              "bool": true
+            }
+          },
+          "showInfo": {
+            "displayName": "Show info",
+            "description": "Display information about the final decision tree (includes training error, cross validation error, root error)",
+            "type": {
+              "bool": true
+            }
+          }
+        }
+      }
+    },
+    "suppressDefaultTitle": true
+  },
+  "dependencies": {
+    "cranPackages": [
+      {
+        "name": "rpart.plot",
+        "displayName": "rpart.plot: Plot 'rpart' Models",
+        "url": "https://cran.r-project.org/web/packages/rpart.plot/index.html"
+      },
+      {
+        "name": "RColorBrewer",
+        "displayName": "RColorBrewer: ColorBrewer Palettes",
+        "url": "https://cran.r-project.org/web/packages/RColorBrewer/index.html"
+      }
+    ]
+  },
+  "content": {
+    "js": "var powerbi;!function(t){var e;!function(t){var e;!function(t){var e;!function(t){function e(t,e,a,i){if(t){var s=t[e];if(s){var n=s[a];if(void 0!==n)return n}}return i}function a(t,e,a,i,s,n){if(t){var r=t[e];if(r){var o=r[a];if(o<s)return s;if(o>n)return n;if(void 0!==o)return o}}return i}function i(t,e,a,i,s,n){if(t){var r=t[e];if(r){var o=r[a];if(void 0!==o)return o>n?n:o<s?s:o}}return i}function s(t,e,a,i,s,n){return n&&e==a&&1==s?i:n&&e!=a&&0==s?i:t}function n(t,e){return\"auto\"!=e?\"None\":\"auto\"==e&&\"None\"==t?\"fast\":t}function r(t,e,a){return t<e?e:t>a?a:t}function o(t,e,a,i,s){var n=t.objects;if(n){var r=n[e];if(r){var o=r[a];if(o){var m=o[i];if(void 0!==m)return m}}}return s}t.getValue=e,t.getValueMinMax=a,t.getValueNumberMinMax=i,t.ifStringReturnString=s,t.ifStringReturnStringClustersMethod=n,t.inMinMax=r,t.getCategoricalObjectValue=o}(e=t.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61||(t.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61={}))}(e=t.visual||(t.visual={}))}(e=t.extensibility||(t.extensibility={}))}(powerbi||(powerbi={}));var powerbi;!function(t){var e;!function(t){var e;!function(t){var e;!function(t){var e=function(){function e(t){this.imageDiv=document.createElement(\"div\"),this.imageDiv.className=\"rcv_autoScaleImageContainer\",t.element.appendChild(this.imageDiv),this.imageElement=document.createElement(\"img\"),this.imageElement.className=\"rcv_autoScaleImage\",this.imageDiv.appendChild(this.imageElement),this.settings_tree_params={show:!1,maxDepth:\"15\",minBucket:\"2\"},this.settings_opt_params={show:!1,complexity:\"1e-5\",xval:\"auto\",maxNumAttempts:\"10\"},this.settings_additional_params={show:!1,showWarnings:!0,showInfo:!0}}return e.prototype.update=function(e){var a=e.dataViews;if(a&&0!==a.length){var i=a[0];if(i&&i.metadata){this.settings_tree_params={show:t.getValue(i.metadata.objects,\"settings_tree_params\",\"show\",!1),maxDepth:t.getValue(i.metadata.objects,\"settings_tree_params\",\"maxDepth\",\"15\"),minBucket:t.getValue(i.metadata.objects,\"settings_tree_params\",\"minBucket\",\"2\")},this.settings_opt_params={show:t.getValue(i.metadata.objects,\"settings_opt_params\",\"show\",!1),complexity:t.getValue(i.metadata.objects,\"settings_opt_params\",\"complexity\",\"1e-5\"),xval:t.getValue(i.metadata.objects,\"settings_opt_params\",\"xval\",\"auto\"),maxNumAttempts:t.getValue(i.metadata.objects,\"settings_opt_params\",\"maxNumAttempts\",\"10\")},this.settings_additional_params={show:t.getValue(i.metadata.objects,\"settings_additional_params\",\"show\",!1),showWarnings:t.getValue(i.metadata.objects,\"settings_additional_params\",\"showWarnings\",!0),showInfo:t.getValue(i.metadata.objects,\"settings_additional_params\",\"showInfo\",!0)};var s=null;i.scriptResult&&i.scriptResult.payloadBase64&&(s=\"data:image/png;base64,\"+i.scriptResult.payloadBase64),s?this.imageElement.src=s:this.imageElement.src=null,this.onResizing(e.viewport)}}},e.prototype.onResizing=function(t){this.imageDiv.style.height=t.height+\"px\",this.imageDiv.style.width=t.width+\"px\"},e.prototype.enumerateObjectInstances=function(t){var e=t.objectName,a=[];switch(e){case\"settings_tree_params\":a.push({objectName:e,properties:{show:this.settings_tree_params.show,maxDepth:this.settings_tree_params.maxDepth,minBucket:this.settings_tree_params.minBucket},selector:null});break;case\"settings_opt_params\":a.push({objectName:e,properties:{show:this.settings_opt_params.show,complexity:this.settings_opt_params.complexity,xval:this.settings_opt_params.xval,maxNumAttempts:this.settings_opt_params.maxNumAttempts},selector:null});break;case\"settings_additional_params\":a.push({objectName:e,properties:{show:this.settings_additional_params.show,showWarnings:this.settings_additional_params.showWarnings,showInfo:this.settings_additional_params.showInfo},selector:null})}return a},e}();t.Visual=e}(e=t.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61||(t.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61={}))}(e=t.visual||(t.visual={}))}(e=t.extensibility||(t.extensibility={}))}(powerbi||(powerbi={}));var powerbi;!function(t){var e;!function(e){var a;!function(e){e.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61={name:\"PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61\",displayName:\"Decision tree\",class:\"Visual\",version:\"1.0.1\",apiVersion:\"1.2.0\",create:function(e){return new t.extensibility.visual.PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61.Visual(e)},custom:!0}}(a=e.plugins||(e.plugins={}))}(e=t.visuals||(t.visuals={}))}(powerbi||(powerbi={}));",
+    "css": ".visual-PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61 .rcv_autoScaleImageContainer{position:relative}.visual-PBI_CV_807533A8_7DBB_41E8_AF46_0450D3447E61 .rcv_autoScaleImageContainer .rcv_autoScaleImage{max-width:100%;max-height:100%;position:absolute;top:50%;left:50%;transform:translateY(-50%) translateX(-50%);-webkit-transform:translateY(-50%) translateX(-50%)}",
+    "iconBase64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQ9JREFUeNpiYBjsgBGfZPeGS/txSC0sDdBbgE2ChYCFDjjED+LSwERtLxNyoSM4XN7dNWD8+ir+n6xlIVT8AUlh2DtxCnrYCQCxAhBfQBO/UJyfU0iMCx1grsMD4vF6+UmidQLUFQz7v7xicLyzFx4hMvOPNsDYrw80gNkXX3IpIPOB4ICoQ8MBFjQbwYYADQNR9UhyDUhssLi++DdsKeEATWN5ISx97Vdxrge6shGHHlziB3DaAozl/xRnPaAh64GUAb40BgszYFJhJMbLF0EYqLgBn2mEXM8ITTL7v7Jxg2OL+9dXFAXAJMNYvGzyflhssv9mYPjJimRBVC4jVheiG4QLIBtGl8Jh8AOAAAMAcJJREzckn0gAAAAASUVORK5CYII="
+  }
+}

@@ -1,0 +1,77 @@
+table Experience
+	lineageTag: b49ef6ee-39d3-4ceb-888c-b61c377c9b82
+
+	column Role
+		dataType: string
+		lineageTag: ac9a39a5-2c86-43a8-ae0e-79480f5685fb
+		summarizeBy: none
+		sourceColumn: Role
+		sortByColumn: Index
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Organization
+		dataType: string
+		lineageTag: f6c7a3e0-2e8e-4987-873f-dae000d3e360
+		summarizeBy: none
+		sourceColumn: Organization
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 85995cb7-b8ff-4b02-a6b2-12df5efd3001
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column Started
+		dataType: string
+		lineageTag: 94cabd25-53fa-44c5-827b-d109aa275060
+		summarizeBy: none
+		sourceColumn: Started
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ended
+		dataType: string
+		lineageTag: 55317d6b-e862-4165-860e-3254b30362e4
+		summarizeBy: none
+		sourceColumn: Ended
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: cd03b990-b4c2-49ee-be60-453ae6238d91
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Experience-555976d8-6457-480b-995a-ec07398ca5d7 = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [Role = nullable text, Organization = nullable text, Location = nullable text, Started = nullable text, Ended = nullable text],
+				        {
+				            {"Data & AI Platform Engineer", "Independent Projects", "Fremont, California, USA", "Sep-2026", "Present"},
+				            {"Senior Data Analyst", "Lumene Oy", "Finland", "Jun-2024", "Aug-2026"},
+				            {"Application Owner / Senior BI Analyst", "Kemira Oyj", "Finland", "Dec-2021", "May-2024"},
+				            {"Business Intelligence Developer", "Barona Group Oy", "Finland", "Mar-2017", "Nov-2021"},
+				            {"Technical Consultant", "Capgemini", "India & Burbank, California, USA", "2011", "2017"}
+				        }
+				    ),
+				    #"Added Index" = Table.AddIndexColumn(Source, "Index", 0, 1, Int64.Type)
+				in
+				    #"Added Index"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

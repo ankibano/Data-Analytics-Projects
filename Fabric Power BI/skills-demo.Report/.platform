@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "skills-demo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fc803549-6d0e-4b9c-8d3a-133a3b935abb"
+  }
+}

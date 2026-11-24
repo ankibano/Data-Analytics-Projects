@@ -1,0 +1,45 @@
+table 'Skill Data'
+	lineageTag: 7b521324-f96d-466f-ba47-bbb8919a0709
+
+	column 'Skill Name'
+		dataType: string
+		lineageTag: d3fcd653-8531-4393-98d4-c0007b7a6a90
+		summarizeBy: none
+		sourceColumn: Skill Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scale
+		dataType: int64
+		formatString: 0
+		lineageTag: cb42e989-fc66-4b56-ab4d-06d1fefac98c
+		summarizeBy: sum
+		sourceColumn: Scale
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Skill Data-44ca2f14-fcc8-4ee7-9cd2-b423530aa71d' = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        type table [#"Skill Name" = nullable text, Scale = nullable text],
+				        {
+				            {"Power BI, Microsoft Fabric, Tableau, Looker", "5"},
+				            {"Governance Frameworks, Data Lineage, RLS, Tenant Administration", "5"},
+				            {"Azure Data Factory, Snowflake, Databricks, Lakehouse, Warehouse, Synapse", "3"},
+				            {"DAX, SQL, Python, PySpark, Power Query, PowerShell, Power Fx", "5"},
+				            {"Power Apps, Power Automate, Copilot Studio", "4"},
+				            {"Azure DevOps, Git, TMDL, Tabular Editor, DAX Studio", "5"},
+				            {"Claude MCP, Microsoft Copilot, Claude Code, Claude Cowork", "3"},
+				            {"Jira, ServiceNow, Miro, Zendesk, Figma", "4"}
+				        }
+				    ),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Scale", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "ea7cfe842a5a4a1f95a7",
+  "position": { "x": 958, "y": 646, "z": 7000, "height": 404, "width": 938, "tabOrder": 6 },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [{
+            "field": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Country" } },
+            "queryRef": "Financials.Country",
+            "nativeQueryRef": "Country"
+          }]
+        },
+        "Y": {
+          "projections": [{
+            "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Sales" } }, "Function": 0 } },
+            "queryRef": "Sum(Financials.Sales)",
+            "nativeQueryRef": "Sum of Sales"
+          }]
+        }
+      },
+      "sortDefinition": {
+        "sort": [{
+          "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Sales" } }, "Function": 0 } },
+          "direction": "Descending"
+        }],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [{
+        "properties": {
+          "show": { "expr": { "Literal": { "Value": "true" } } },
+          "text": { "expr": { "Literal": { "Value": "'Sales by country'" } } },
+          "heading": { "expr": { "Literal": { "Value": "'Heading3'" } } }
+        }
+      }]
+    }
+  }
+}

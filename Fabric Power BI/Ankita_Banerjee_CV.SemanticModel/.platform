@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Ankita_Banerjee_CV"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1c138cac-6ee8-4935-9bce-70c21853ee8d"
+  }
+}

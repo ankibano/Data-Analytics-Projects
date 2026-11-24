@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fi-FI
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Skill Data","Others Skill","Experience","Language"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table 'Skill Data'
+ref table DateTableTemplate_c7625700-9f0a-4a4a-8943-84e15e6b4d0b
+ref table 'Others Skill'
+ref table Experience
+ref table Language
+
+ref cultureInfo en-US
+

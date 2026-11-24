@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "bf651a678a094dae9c3f",
+  "position": { "x": 24, "y": 112, "z": 3000, "height": 108, "width": 1872, "tabOrder": 2 },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Sales" } }, "Function": 0 } },
+              "queryRef": "Sum(Financials.Sales)",
+              "nativeQueryRef": "Sum of Sales"
+            },
+            {
+              "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Gross Sales" } }, "Function": 0 } },
+              "queryRef": "Sum(Financials.Gross Sales)",
+              "nativeQueryRef": "Sum of Gross Sales"
+            },
+            {
+              "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Discounts" } }, "Function": 0 } },
+              "queryRef": "Sum(Financials.Discounts)",
+              "nativeQueryRef": "Sum of Discounts"
+            },
+            {
+              "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Profit" } }, "Function": 0 } },
+              "queryRef": "Sum(Financials.Profit)",
+              "nativeQueryRef": "Sum of Profit"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [{
+        "properties": {
+          "fontSize": { "expr": { "Literal": { "Value": "28D" } } },
+          "customFormatString": { "expr": { "Literal": { "Value": "'$#,0;($#,0)'" } } }
+        },
+        "selector": { "id": "default" }
+      }],
+      "label": [{
+        "properties": { "fontSize": { "expr": { "Literal": { "Value": "14D" } } } },
+        "selector": { "id": "default" }
+      }],
+      "padding": [{
+        "properties": { "paddingUniform": { "expr": { "Literal": { "Value": "8D" } } } },
+        "selector": { "id": "default" }
+      }],
+      "layout": [{
+        "properties": { "paddingUniform": { "expr": { "Literal": { "Value": "0D" } } } },
+        "selector": { "id": "default" }
+      }]
+    },
+    "visualContainerObjects": {
+      "padding": [{
+        "properties": {
+          "top": { "expr": { "Literal": { "Value": "8D" } } },
+          "bottom": { "expr": { "Literal": { "Value": "8D" } } },
+          "left": { "expr": { "Literal": { "Value": "8D" } } },
+          "right": { "expr": { "Literal": { "Value": "8D" } } }
+        },
+        "selector": { "id": "default" }
+      }],
+      "spacing": [{
+        "properties": {
+          "customizeSpacing": { "expr": { "Literal": { "Value": "true" } } },
+          "verticalSpacing": { "expr": { "Literal": { "Value": "2D" } } }
+        },
+        "selector": { "id": "default" }
+      }]
+    }
+  }
+}

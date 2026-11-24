@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "author": {
+    "name": "Visual BI Solutions",
+    "email": "solutions@visualbi.com"
+  },
+  "resources": [
+    {
+      "resourceId": "rId0",
+      "sourceType": 5,
+      "file": "resources/performanceBubbleChartFBAAA829CB604E5CAB4F21729F233294.pbiviz.json"
+    }
+  ],
+  "visual": {
+    "guid": "performanceBubbleChartFBAAA829CB604E5CAB4F21729F233294",
+    "name": "IBCSBubbleChart",
+    "displayName": "Bubble / Scatter Chart - xViz",
+    "version": "1.0.0",
+    "description": "xViz IBCS Bubble Chart",
+    "supportUrl": "https://xviz.com/",
+    "gitHubUrl": "",
+    "visualClassName": "BubbleChart"
+  },
+  "metadata": {
+    "pbivizjson": {
+      "resourceId": "rId0"
+    }
+  }
+}

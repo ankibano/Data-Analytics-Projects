@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY22SU09",
+      "reportVersionAtImport": {
+        "visual": "1.8.75",
+        "report": "2.0.75",
+        "page": "1.3.75"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY22SU09",
+          "path": "BaseThemes/CY22SU09.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Ankita_1_(3)00310969769187630120261113214908602.jpg",
+          "path": "Ankita_1_(3)00310969769187630120261113214908602.jpg",
+          "type": "Image"
+        },
+        {
+          "name": "AnkitaB_Resume_Hobbies20261113214908602.png",
+          "path": "AnkitaB_Resume_Hobbies20261113214908602.png",
+          "type": "Image"
+        },
+        {
+          "name": "Dia2934171942947905820261113214908602.SVG",
+          "path": "Dia2934171942947905820261113214908602.SVG",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

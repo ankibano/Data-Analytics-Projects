@@ -1,0 +1,73 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 103
+          },
+          "nodeIndex": "Country",
+          "nodeLineageTag": "9e3b7f09-37ae-4fc3-bfd0-bbd992a5a54e",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 697,
+            "y": 72
+          },
+          "nodeIndex": "Segment",
+          "nodeLineageTag": "2e7bc06e-7bb6-4715-a1d7-8f49a5ffc79b",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 342,
+            "y": 15
+          },
+          "nodeIndex": "Financials",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 981,
+            "y": 103
+          },
+          "nodeIndex": "Key Measures",
+          "nodeLineageTag": "27f0bfc5-5593-4df9-8d0d-7794c1e2e5ea",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

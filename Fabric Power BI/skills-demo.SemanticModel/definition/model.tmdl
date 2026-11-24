@@ -1,0 +1,24 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-FI
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Financials","Segment","Country","Key Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Financials
+ref table DateTableTemplate_85fb37f4-977f-4bb2-976c-0b0cd13b5606
+ref table LocalDateTable_537033e7-04a3-4be9-8f7b-10aad3d30930
+ref table Segment
+ref table Country
+ref table 'Key Measures'
+
+ref cultureInfo en-GB
+

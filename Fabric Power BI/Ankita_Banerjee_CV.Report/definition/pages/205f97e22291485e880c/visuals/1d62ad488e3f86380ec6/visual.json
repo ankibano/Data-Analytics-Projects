@@ -1,0 +1,593 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "1d62ad488e3f86380ec6",
+  "position": {
+    "x": 311.25,
+    "y": 852.5,
+    "z": 22000,
+    "height": 1947.5,
+    "width": 673.75,
+    "tabOrder": 15000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Data & AI Platform Engineer (Independent projects) | Sep 2026 – Present | Fremont, California | USA",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontStyle": "italic",
+                      "fontSize": "16pt",
+                      "color": "#4a483b"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Overview: Building end-to-end data and AI projects on Microsoft Fabric platform using Lakehouse, warehouse, Apache Spark, SQL, Dataflow Gen2 and Claude AI to deepen my analytics engineering and AI-assisted BI skills",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Fabric: Building Sales analytics solution on Fabric lakehouse and warehouse, from raw data to a governed Power BI semantic Model. The transformation of data performed using DataflowGen 2 and Python Notebooks prior beign loaded to Power BI which reduces semantic model refresh load.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Claude AI & MCP: Connecting Claude to Power BI Semantic models through the Power BI modelling MCP server to review DAX measure and check model quality. Implemented Power BI Authoring skills to build Sales report to streamline the traditional development lifecycle. Building agent workflow that automate repeatable BI tasks such as measure documentation, model audits and report QA.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Senior Data Analyst — Lumene Oy | June 2024 – Aug 2026 | Consumer Goods | Finland",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontStyle": "italic",
+                      "fontSize": "16pt",
+                      "color": "#4a483b"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Owned the company's Power BI corporate reporting platform end to end — semantic models, corporate datasets, and a suite of 10+ corporate reports serving 100+ users including market heads and C-suite executives across Sales & Operations Planning, Procurement, Production, Customer Service, New Product Development, Marketing, and Business Controls.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Translated ambiguous business questions into workable data models — defining and validating measures and reconciling conflicting figures across SAP, Relex, and SharePoint with business stakeholders — and delivered end-to-end reporting solutions from requirements clarification to delivery.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Owned platform governance — naming conventions for datasets and reports, dataset and report architecture documentation, row-level security implementation by security groups, administered tenant, published data process documentation, access management, and data quality control — reducing data incident tickets by 30%.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Developed and versioned semantic models in TMDL under Git source control with CI/CD pipelines; performance-tuned models using Tabular Editor and DAX Studio.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Evaluated and piloted emerging AI-assisted capabilities for the data and reporting platform — including Claude MCP server integration with Power BI for AI-assisted semantic model development — and assessed their suitability for wider organizational adoption.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Played a key role in an SAP S/4 Hana migration: redesigned and validated calculation logic for complex custom Z tables, led the transition of the on-premises data warehouse to a cloud platform, and developed new semantic models enabling seamless BI solutions.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Built organization-wide data capability: delivered Power BI training to commercial and operational teams across Finland and Scandinavia, created learning paths with 5 self-service BI courses on the corporate learning platform, and ran self-service BI workshops — training 20+ users and reducing dependency on the central data team.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Power Automate – Automated data extraction and distribution: Extraction of curated data from production Power BI semantic models, parsing and publishing outputs to a centralized SharePoint site — enabling secure, self-service data access for external guest users per custom business requirements.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Power Platform - Master Data Management app: Architected and developed an end-to-end Master Data Management (MDM) application in Power Apps, integrated with premium connectors to a backend database — enabling business teams to manage product hierarchies, customer hierarchies, and master product data through a single governed self-service tool, replacing fragmented manual maintenance.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Governance: Established the organization's Power Platform governance model; analysed license structure and usage across the tenant, built business cases for license procurement, and implemented DLP policies to standardize connector usage and secure the environment.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Application Owner / Senior BI Analyst — Kemira Oyj | Dec 2021 – May 2024 | Chemicals Manufacturing | Finland",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontStyle": "italic",
+                      "fontSize": "16pt",
+                      "color": "#4a483b"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Integrated third-party emissions and utility data via REST APIs and automated file ingestion using Azure Data Factory into a medallion-architecture data lake, applied GHG Protocol emission factors in the transformation layer, and built a certified Power BI semantic model — delivering a company-wide ESG dashboard to 4,000+ employees that replaced manual annual reporting with monthly self-service insights.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Implemented workflow layer around the data integration and low code application; Power App and Power Automate solutions that turned manual processes into self-service tools, by importing Excel upload that writes to backend database with the usage of premium connectors for R&D Team.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Collected, processed, and analysed large-scale IoT sensor data from manufacturing equipment (example temperature, vibration, pressure, machine logs) and processed it through Databricks by creating live streaming datasets based on sensor readings, defining schema and generating REST API URL. Power BI Reports were launched using the streaming data to detect the abnormal pattern with data latency under 10-seconds.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Business Intelligence Developer — Barona Group Oy | Mar 2017 – Nov 2021 | Staffing & HR Services | Finland",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontStyle": "italic",
+                      "fontSize": "16pt",
+                      "color": "#4a483b"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Built a dynamic resource planning model for contracting that applied moving-average forecasting to project demand and invoicing cycles, ensuring contractors' billable work was captured and no invoices were lost. Surfaced the forecast in Power BI so planners could align resourcing to projected workload.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Delivered end-to-end financial analytics — P&L, General Ledger, and Net Revenue dashboards — giving finance and commercial teams a single reliable view of business performance by reconciling the data from different sources.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Owned the end-to-end BI development lifecycle (SDLC) from requirements gathering, data modelling, development, testing, and deployment — delivering reporting solutions across service centre, recruitment, finance, and sales processes on QlikView, SSRS, SSIS, SSAS and Power BI.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Developed ServiceNow reporting to calculate FCR rate for categorization of ticket volume into high, average with a goal to reduce the ticket volume, lower cost per contact to optimize operational efficiency and customer experience.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Integrated Workday with AWS S3, created pipeline in AWS Glue and view in Amazon Redshift through the Stitch platform and built Power BI semantic models to track resource billable hours, improving efficiency by 35% and increasing client revenue.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Analysed incoming and outgoing call data from a Finnish cloud-based communications platform to create a customer service report that optimized agent allocation, maximized call handling, and improved efficiency by 20%.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Technical Consultant — Capgemini India | 2011 – 2017 | IT Consulting | India & Burbank, California, USA",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Times New Roman",
+                      "fontStyle": "italic",
+                      "fontSize": "16pt",
+                      "color": "#4a483b"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Designed and developed Performance analytics report to track service disruptions from report to resolution by handling highest volume ITSM datasets. This includes number of tickets, priority, state, category, subcategory. The report demonstrated the KPIS related to SLA% breach, FCR rate, incident volume trend,",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Developed Failure Mode Analysis Report to identify the reoccurring Incidents tickets, Change management Tickets and Problem Tickets to identify the severity and business impact. These results the creation of knowledge management objects portal for the business stakeholders to identify which repetitive incidents needs to convert to change management tickets or to problem management ticket.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Modernized data platforms by migrating manual SFTP-based Excel extractions to automated ETL pipelines in SSIS and optimizing data models, resulting development of Incident occurrence rate and Customer service reports to identify the frequency of the call and incidents tickets for development of stable solutions.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Automated retailer price-update workflows by scripting scheduled POS processes, reducing incident tickets by 30%; managed full ITIL application lifecycle and maintained a knowledge base that accelerated ticket resolution.",
+                    "textStyle": {
+                      "fontFamily": "Times New Roman",
+                      "fontSize": "12pt",
+                      "color": "#242628"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FBF9F9'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DFE1E3'"
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "keepLayerOrder": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "skills-demo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4cd28cb0-8c5e-4f6f-b7f9-8e09c47dad08"
+  }
+}

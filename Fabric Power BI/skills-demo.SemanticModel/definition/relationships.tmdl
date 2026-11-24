@@ -1,0 +1,13 @@
+relationship 9ff08673-67e2-4a66-a3b5-9745acd93970
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Financials.Date
+	toColumn: LocalDateTable_537033e7-04a3-4be9-8f7b-10aad3d30930.Date
+
+relationship AutoDetected_3f9cd490-7b2d-4685-acfd-1928d5006e95
+	fromColumn: Financials.Segment
+	toColumn: Segment.Segment
+
+relationship AutoDetected_6b01e317-2b72-4a70-bb05-30d85e7014db
+	fromColumn: Financials.Country
+	toColumn: Country.Country
+

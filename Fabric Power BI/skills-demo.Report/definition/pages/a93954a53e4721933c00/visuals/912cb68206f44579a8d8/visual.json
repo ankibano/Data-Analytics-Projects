@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "912cb68206f44579a8d8",
+  "position": { "x": 24, "y": 646, "z": 6000, "height": 404, "width": 914, "tabOrder": 5 },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [{
+            "field": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Segment" } },
+            "queryRef": "Financials.Segment",
+            "nativeQueryRef": "Segment"
+          }]
+        },
+        "Y": {
+          "projections": [{
+            "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Profit" } }, "Function": 0 } },
+            "queryRef": "Sum(Financials.Profit)",
+            "nativeQueryRef": "Sum of Profit"
+          }]
+        }
+      },
+      "sortDefinition": {
+        "sort": [{
+          "field": { "Aggregation": { "Expression": { "Column": { "Expression": { "SourceRef": { "Entity": "Financials" } }, "Property": "Profit" } }, "Function": 0 } },
+          "direction": "Descending"
+        }],
+        "isDefaultSort": false
+      }
+    },
+    "visualContainerObjects": {
+      "title": [{
+        "properties": {
+          "show": { "expr": { "Literal": { "Value": "true" } } },
+          "text": { "expr": { "Literal": { "Value": "'Profit by segment'" } } },
+          "heading": { "expr": { "Literal": { "Value": "'Heading3'" } } }
+        }
+      }]
+    }
+  }
+}
